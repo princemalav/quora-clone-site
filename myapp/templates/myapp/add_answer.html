@@ -1,0 +1,16 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+
+<div class="container">
+
+  <p>Question: {{ question.question_text }}</p>
+  <p>Answer: </p>
+  <form action="{{ question.get_answer_url }}" method="POST">
+    {% csrf_token %}
+    <textarea name="answer" rows="8" cols="80"></textarea>
+    <br>
+    <button type="submit" name="button">Submit</button>
+
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+{% for objects in question_list %}
+  <a href='{{ objects.get_absolute_url }}'><p>Question title: {{ objects.question_title }}</p><br></a>
+  <p>Publish Date:{{ objects.pub_date }} </p>
+  <br>
+  <p>Author name:{{ objects.author.username }} </p>
+  <br>
+  <p>upvotes: {{ objects.up_votes }}</p><p>downvotes: {{ objects.down_votes }}</p>
+{% endfor %}
+{% endblock %}

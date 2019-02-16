@@ -1,0 +1,17 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<div class="container">
+
+
+  <form method="POST" action='{% url 'myapp:ask_question' %}'>
+    {% csrf_token %}
+    <h2>Breif Introduction of your question</h2>
+    <input type="text" name="question_title" class="form-control">
+    <h2>Detail of your question</h2>
+    <input type="text" name="question_detail" class="form-control">
+    <br>
+    <br>
+    <button type="submit" name="button" value="Submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+{% endblock %}

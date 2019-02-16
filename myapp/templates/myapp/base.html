@@ -1,0 +1,58 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Quora</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+     <div class="container">
+       <a class="navbar-brand" href="" style="font-style: italic;">Quora</a>
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse" id="navbarResponsive">
+         <ul class="navbar-nav ml-auto">
+           {% if request.user.is_authenticated %}
+           <li class="nav-item ">
+             <a class="nav-link" href="{% url 'myapp:logout' %}">Logout</a>
+           </li>
+           {% else %}
+           <li class="nav-item">
+             <a class="nav-link" href="{% url 'myapp:register' %}">Register</a>
+           </li>
+           <li class="nav-item">
+             <a class="nav-link" href="{% url 'myapp:login' %}">Login</a>
+           </li>
+           {% endif %}
+         </ul>
+        </div>
+    </div>
+  </nav>
+  <div class="container"
+    <h1>{{ home_content }}</h1>
+  </div>
+
+      {% block content %}
+      {% endblock %}
+      <div class="container">
+
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'myapp:ask_question' %}">{{ ask_question }}</a>
+      {% endif %}
+      {% for objects in question_list %}
+        <a href='{{ objects.get_absolute_url }}'><p>Question title: {{ objects.question_title }}</p></a>
+        <p>Publish Date:{{ objects.pub_date }} </p>
+        <p>Author name:{{ objects.author.username }} </p>
+        <p>upvotes: {{ objects.up_votes }}</p><p>downvotes: {{ objects.down_votes }}</p>
+      {% endfor %}
+    </div>
+
+
+  </body>
+</html>

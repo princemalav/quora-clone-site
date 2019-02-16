@@ -1,0 +1,35 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<div class="container">
+  <p>Question Title: {{ question.question_title }}</p>
+  <p>Question Detail: {{ question.question_text }}</p>
+  <p>author: {{ question.author.username }}</p>
+  <p>pub. date: {{ question.pub_date}}</p>
+  <a href="{{ question.get_answer_url }}"><button type="button" name="button">Answer</button></a>
+  <br>
+  <br>
+  <form  action="{{ question.get_vote_url }}" method="POST">
+    {% csrf_token %}
+    <input type="submit" name="vote" value="UpVote">
+  </form>
+  <form  action="{{ question.get_vote_url }}" method="POST">
+    {% csrf_token %}
+    <input type="submit" name="vote" value="DownVote">
+  </form>
+
+  <h3>Answers:</h3>
+  <br>
+  {% if answers %}
+    {% for answer in answers %}
+      <a href="{{ answer.get_absolute_url }}"><p>Answer: {{ answer.ans_text }}</p></a>
+      <p>Author: {{ answer.author }}</p>
+      <p>Date: {{ answer.pub_date }}</p>
+      <p>Upvotes: {{ answer.up_vote }}</p>
+      <p>DownVotes: {{ answer.down_vote }}</p>
+      <br>
+
+    {% endfor %}
+  {% endif %}
+</div>
+
+{% endblock %}

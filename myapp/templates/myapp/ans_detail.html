@@ -1,0 +1,17 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<div class="container">
+  <p>Answer: {{ answer.ans_text }}</p>
+  <p>author: {{ answer.author.username }}</p>
+  <p>pub. date: {{ answer.pub_date}}</p>
+  <br>
+  <br>
+  <form  action="{{ answer.get_vote_url }}" method="POST">
+    {% csrf_token %}
+    <input type="submit" name="vote" value="UpVote">
+  </form>
+  <form  action="{{ answer.get_vote_url }}" method="POST">
+    {% csrf_token %}
+    <input type="submit" name="vote" value="DownVote">
+  </form>
+{% endblock %}
